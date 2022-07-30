@@ -28,18 +28,17 @@
         left: 0;
         width: 100%;
       }
+	  .container {
+		position:absolute;
+		left:0;
+		right:0;
+		top:60px;
+		color: #000;
+		z-index:999999999999999;
+		color: #000;
+		margin-left: 100px;
+	  }
     </style>
-    <script type="text/javascript">
-    //analytics
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-26274524-4']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    </script>
   </head>
 
   <body>
@@ -47,6 +46,7 @@
       <div id="global"></div>
       <div id="title">
       </div>
+	  <div class="container">스코어</div>
       <div id="menucontainer">
         <div id="menu">
           <div id="start">Start</div>
@@ -120,7 +120,9 @@
     <script src="bkcore/hexgl/Gameplay.js"></script>
 
     <script src="bkcore/hexgl/tracks/Cityscape.js"></script>
-
+	<script>
+	var game_record;
+	</script>
     <script src="bkcore/hexgl/HexGL.js"></script>
 
     <script src="launch.js"></script>

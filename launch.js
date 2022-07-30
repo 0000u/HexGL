@@ -112,5 +112,93 @@
       return $('step-2').style.backgroundImage = "url(css/help-" + s[0][3] + ".png)";
     };
   }
+  
+getDataAsync('https://test.aengji.com/afreecatv/afreecatv_game_select.php').then(data => {
+	game_record = data;
+	displayData(data);
+}).catch((error) => {
+  console.error('실패:', error);
+});
+
+function displayData(data){
+	const container = document.querySelector('.container');
+	container.innerHTML = '<span style="color:#000;">최근 일주일간 기록</span>';
+	var table = ce(container, 'table', {style:'color:#000'});
+	var th = ce(table, 'tr');
+	cetn(th, 'td', '순위', {style:'width:50px;font-weight:800'});
+	cetn(th, 'td', '이름', {style:'width:200px;font-weight:800'});
+	cetn(th, 'td', '시간', {style:'width:100px;font-weight:800'});
+	cetn(th, 'td', '횟수', {style:'width:100px;font-weight:800'});
+	var tbody = ce(table, 'tbody', );
+	var cnt = data.length;
+	if(cnt > 10){
+		cnt = 10;
+	}
+	for(var i=0;i<cnt;i++){
+		var tr = ce(tbody, 'tr');
+		cetn(tr, 'td', i+1);
+		cetn(tr, 'td', data[i][0]);
+		cetn(tr, 'td', data[i][1]);
+		cetn(tr, 'td', data[i][2]);
+	}
+}
+
+async function getDataAsync(url = '') {
+	var response = await fetch(url);
+	var data = await response.json();
+	return data;
+}
+
+function postData(url, params) {
+	return fetch(url, {
+    method: 'POST',
+	mode: 'no-cors',
+	headers: {'Content-Type':'application/x-www-form-urlencoded'},
+    body: params
+  })
+	.then((response) => {
+		return response.json();
+	})
+	.then((data) => {
+		return data;
+	})
+	.catch(function (error) {
+		console.log(error);
+	});
+}
+
+function ce(parentNode, childTag) {
+    childTag = document.createElement(childTag);
+    parentNode.appendChild(childTag);
+    return childTag;
+}
+function ce(parentNode, childTag, attr) {
+    childTag = document.createElement(childTag);
+    for (let a in attr) {
+        childTag.setAttribute(a, attr[a]);
+    }
+    parentNode.appendChild(childTag);
+    return childTag;
+}
+function cetn(parentNode, childTag, t) {
+    childTag = document.createElement(childTag);
+    childTag.appendChild(document.createTextNode(t));
+    parentNode.appendChild(childTag);
+    return childTag;
+}
+function cetn(parentNode, childTag, t, attr) {
+    childTag = document.createElement(childTag);
+    for (let a in attr) {
+        childTag.setAttribute(a, attr[a]);
+    }
+    childTag.appendChild(document.createTextNode(t));
+    parentNode.appendChild(childTag);
+    return childTag;
+}
+function textNode(node, t) {
+    node.appendChild(document.createTextNode(t));
+}
+
+
 
 }).call(this);
