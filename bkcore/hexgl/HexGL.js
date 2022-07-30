@@ -217,9 +217,9 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 				});
 			}		
 		}	
-				
+		
 		this.gameover.children[0].innerHTML += '<span style="color:#000;">최근 일주일간 기록</span>';
-		var table = ce(container, 'table', {style:'color:#000'});
+		var table = ce(this.gameover.children[0], 'table', {style:'color:#000'});
 		var th = ce(table, 'tr');
 		cetn(th, 'td', '순위', {style:'width:50px;font-weight:800'});
 		cetn(th, 'td', '이름', {style:'width:200px;font-weight:800'});
