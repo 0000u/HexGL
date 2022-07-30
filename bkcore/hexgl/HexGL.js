@@ -213,33 +213,6 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 			}		
 		}	
 		
-		this.gameover.children[0].innerHTML += '<span style="color:#000;">최근 일주일간 기록</span>';
-		var table = ce(this.gameover.children[0], 'table', {style:'color:#000'});
-		var th = ce(table, 'tr');
-		cetn(th, 'td', '순위', {style:'width:50px;font-weight:800'});
-		cetn(th, 'td', '이름', {style:'width:200px;font-weight:800'});
-		cetn(th, 'td', '시간', {style:'width:100px;font-weight:800'});
-		// cetn(th, 'td', '횟수', {style:'width:100px;font-weight:800'});
-		var tbody = ce(table, 'tbody', );
-		var cnt = game_record.length;
-		if(cnt > 10){
-			cnt = 10;
-		}
-		for(var i=0;i<cnt;i++){
-			var t = game_record[i][1];
-			var h, m, ms, s;
-			ms = t % 1000;
-			s = Math.floor((t / 1000) % 60);
-			m = Math.floor((t / 60000) % 60);
-			h = Math.floor(t / 3600000);
-		  
-			var tr = ce(tbody, 'tr');
-			cetn(tr, 'td', i+1);
-			cetn(tr, 'td', game_record[i][0]);
-			cetn(tr, 'td', m + "분 " + s + "초 " + ms);
-			// cetn(tr, 'td', game_record[i][2]);
-		}
-	
 		return;
 	}
 
@@ -508,37 +481,4 @@ function postData(url, params) {
 	.catch(function (error) {
 		console.log(error);
 	});
-}
-
-
-function ce(parentNode, childTag) {
-    childTag = document.createElement(childTag);
-    parentNode.appendChild(childTag);
-    return childTag;
-}
-function ce(parentNode, childTag, attr) {
-    childTag = document.createElement(childTag);
-    for (let a in attr) {
-        childTag.setAttribute(a, attr[a]);
-    }
-    parentNode.appendChild(childTag);
-    return childTag;
-}
-function cetn(parentNode, childTag, t) {
-    childTag = document.createElement(childTag);
-    childTag.appendChild(document.createTextNode(t));
-    parentNode.appendChild(childTag);
-    return childTag;
-}
-function cetn(parentNode, childTag, t, attr) {
-    childTag = document.createElement(childTag);
-    for (let a in attr) {
-        childTag.setAttribute(a, attr[a]);
-    }
-    childTag.appendChild(document.createTextNode(t));
-    parentNode.appendChild(childTag);
-    return childTag;
-}
-function textNode(node, t) {
-    node.appendChild(document.createTextNode(t));
 }
