@@ -195,10 +195,8 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 		this.gameover.children[0].innerHTML = tf.m + "'" + tf.s + "''" + tf.ms;
 		this.containers.main.parentElement.style.display = "none";
 		
-		
-		console.log('게임종료: ' + f);
-		if(game_record.length < 11 || seconds <= game_record[game_record.length-1][1]){
-			if(seconds == game_record[game_record.length-1][1]){
+		if(game_record.length < 11 || f <= game_record[game_record.length-1][1]){
+			if(f == game_record[game_record.length-1][1]){
 				if(moves >= game_record[game_record.length-1][2]){
 					return;
 				}
@@ -207,7 +205,7 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 			var name = prompt("기록 갱신. 이름을 입력하세요.", "익명");
 
 			if (name != null) {
-				game_record.push([name, seconds, moves]);
+				game_record.push([name, f, 0]);
 				game_record = game_record.sort(function(a, b) {
 					if (a[1] == b[1]) {
 						return a[2] - b[2];
@@ -219,8 +217,34 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 				});
 			}		
 		}	
-		
-		
+				
+		this.gameover.children[0].innerHTML += '<span style="color:#000;">최근 일주일간 기록</span>';
+		var table = ce(container, 'table', {style:'color:#000'});
+		var th = ce(table, 'tr');
+		cetn(th, 'td', '순위', {style:'width:50px;font-weight:800'});
+		cetn(th, 'td', '이름', {style:'width:200px;font-weight:800'});
+		cetn(th, 'td', '시간', {style:'width:100px;font-weight:800'});
+		// cetn(th, 'td', '횟수', {style:'width:100px;font-weight:800'});
+		var tbody = ce(table, 'tbody', );
+		var cnt = game_record.length;
+		if(cnt > 10){
+			cnt = 10;
+		}
+		for(var i=0;i<cnt;i++){
+			var t = game_record[i][1];
+			var h, m, ms, s;
+			ms = t % 1000;
+			s = Math.floor((t / 1000) % 60);
+			m = Math.floor((t / 60000) % 60);
+			h = Math.floor(t / 3600000);
+		  
+			var tr = ce(tbody, 'tr');
+			cetn(tr, 'td', i+1);
+			cetn(tr, 'td', game_record[i][0]);
+			cetn(tr, 'td', m + "분 " + s + "초 " + ms);
+			// cetn(tr, 'td', game_record[i][2]);
+		}
+	
 		return;
 	}
 
