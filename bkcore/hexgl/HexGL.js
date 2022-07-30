@@ -195,22 +195,17 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 		this.gameover.children[0].innerHTML = tf.m + "'" + tf.s + "''" + tf.ms;
 		this.containers.main.parentElement.style.display = "none";
 		
-		if(game_record.length < 11 || f <= game_record[game_record.length-1][1]){
-			if(f == game_record[game_record.length-1][1]){
-				if(moves >= game_record[game_record.length-1][2]){
-					return;
-				}
-			}
-			
+		if(game_record.length < 11 || f > game_record[game_record.length-1][1]){
+						
 			var name = prompt("기록 갱신. 이름을 입력하세요.", "익명");
 
 			if (name != null) {
 				game_record.push([name, f, 0]);
 				game_record = game_record.sort(function(a, b) {
 					if (a[1] == b[1]) {
-						return a[2] - b[2];
+						return b[2] - a[2];
 					}
-					return a[1] - b[1];
+					return b[1] - a[1];
 				});
 				
 				postData('https://test.aengji.com/afreecatv/afreecatv_game_insert.php', 'name=' + name + '&record=' + f + '&record2=0').then(game_record => {			
