@@ -128,7 +128,7 @@ function displayData(data){
 	cetn(th, 'td', '순위', {style:'width:50px;font-weight:800'});
 	cetn(th, 'td', '이름', {style:'width:200px;font-weight:800'});
 	cetn(th, 'td', '시간', {style:'width:100px;font-weight:800'});
-	cetn(th, 'td', '횟수', {style:'width:100px;font-weight:800'});
+	// cetn(th, 'td', '횟수', {style:'width:100px;font-weight:800'});
 	var tbody = ce(table, 'tbody', );
 	var cnt = data.length;
 	if(cnt > 10){
@@ -139,7 +139,7 @@ function displayData(data){
 		cetn(tr, 'td', i+1);
 		cetn(tr, 'td', data[i][0]);
 		cetn(tr, 'td', data[i][1]);
-		cetn(tr, 'td', data[i][2]);
+		// cetn(tr, 'td', data[i][2]);
 	}
 }
 
