@@ -233,7 +233,7 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 			}
 		}
 		// ladder record
-		var p = bkcore.hexgl.Ladder.global[t][d][bkcore.hexgl.Ladder.global[t][d].length-2];
+		/* var p = bkcore.hexgl.Ladder.global[t][d][bkcore.hexgl.Ladder.global[t][d].length-2];
 		if(p != undefined && p['score'] > f)
 		{
 			dh != undefined && (dh.innerHTML = "You made it to the HOF!");
@@ -241,7 +241,7 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 		else
 		{
 			dh != undefined && (dh.innerHTML = "Hall Of Fame");
-		}
+		} */
 
 		dt != undefined && (dt.innerHTML = tf.m + ts[1] + tf.s + ts[2] + tf.ms);
 		dl1 != undefined && (dl1.innerHTML = tl[0]["m"] != undefined ? tl[0].m + ts[1] + tl[0].s + ts[2] + tl[0].ms : "-");
@@ -250,6 +250,29 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 
 		// Ladder save
 		// Undisclosed
+		if(game_record.length < 11 || seconds <= game_record[game_record.length-1][1]){
+			if(seconds == game_record[game_record.length-1][1]){
+				if(moves >= game_record[game_record.length-1][2]){
+					return;
+				}
+			}
+			
+			var name = prompt("기록 갱신. 이름을 입력하세요.", "익명");
+
+			if (name != null) {
+				game_record.push([name, seconds, moves]);
+				game_record = game_record.sort(function(a, b) {
+					if (a[1] == b[1]) {
+						return a[2] - b[2];
+					}
+					return a[1] - b[1];
+				});
+				
+				postData('https://test.aengji.com/afreecatv/afreecatv_game_insert.php', 'name=' + name + '&record=' + f + '&record2=0').then(game_record => {			
+				});
+			}		
+		}	
+		
 	}
 	else
 	{
@@ -270,7 +293,7 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 		+'&p[url]='+encodeURIComponent('http://hexgl.bkcore.com')
 		+'&p[images][0]='+encodeURIComponent('http://hexgl.bkcore.com/image.png'));
 
-	bkcore.hexgl.Ladder.displayLadder('finish-ladder', t, d, 8);
+	//bkcore.hexgl.Ladder.displayLadder('finish-ladder', t, d, 8);
 
 	if(this.manager.get('game').objects.lowFPS >= 999)
 		sl != undefined && (sl.innerHTML = 'Note: Your framerate was pretty low, you should try a lesser graphic setting!');
