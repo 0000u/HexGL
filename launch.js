@@ -112,7 +112,7 @@
       return $('step-2').style.backgroundImage = "url(css/help-" + s[0][3] + ".png)";
     };
   }
-console.log('버젼: 2');
+console.log('버젼: 3');
 getDataAsync('https://test.aengji.com/afreecatv/afreecatv_game_select.php').then(data => {
 	game_record = data;
 	displayData(data);
