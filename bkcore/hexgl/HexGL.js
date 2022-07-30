@@ -250,6 +250,7 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 
 		// Ladder save
 		// Undisclosed
+		console.log('게임종료: ' + f);
 		if(game_record.length < 11 || seconds <= game_record[game_record.length-1][1]){
 			if(seconds == game_record[game_record.length-1][1]){
 				if(moves >= game_record[game_record.length-1][2]){
