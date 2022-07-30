@@ -514,3 +514,36 @@ function postData(url, params) {
 		console.log(error);
 	});
 }
+
+
+function ce(parentNode, childTag) {
+    childTag = document.createElement(childTag);
+    parentNode.appendChild(childTag);
+    return childTag;
+}
+function ce(parentNode, childTag, attr) {
+    childTag = document.createElement(childTag);
+    for (let a in attr) {
+        childTag.setAttribute(a, attr[a]);
+    }
+    parentNode.appendChild(childTag);
+    return childTag;
+}
+function cetn(parentNode, childTag, t) {
+    childTag = document.createElement(childTag);
+    childTag.appendChild(document.createTextNode(t));
+    parentNode.appendChild(childTag);
+    return childTag;
+}
+function cetn(parentNode, childTag, t, attr) {
+    childTag = document.createElement(childTag);
+    for (let a in attr) {
+        childTag.setAttribute(a, attr[a]);
+    }
+    childTag.appendChild(document.createTextNode(t));
+    parentNode.appendChild(childTag);
+    return childTag;
+}
+function textNode(node, t) {
+    node.appendChild(document.createTextNode(t));
+}
