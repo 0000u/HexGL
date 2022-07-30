@@ -112,7 +112,7 @@
       return $('step-2').style.backgroundImage = "url(css/help-" + s[0][3] + ".png)";
     };
   }
-console.log('버젼: 3');
+
 getDataAsync('https://test.aengji.com/afreecatv/afreecatv_game_select.php').then(data => {
 	game_record = data;
 	displayData(data);
@@ -120,7 +120,7 @@ getDataAsync('https://test.aengji.com/afreecatv/afreecatv_game_select.php').then
   console.error('실패:', error);
 });
 
-function displayData(data){
+function displayData(game_record){
 	const container = document.querySelector('.container');
 	container.innerHTML = '<span style="color:#000;">최근 일주일간 기록</span>';
 	var table = ce(container, 'table', {style:'color:#000'});
@@ -130,15 +130,22 @@ function displayData(data){
 	cetn(th, 'td', '시간', {style:'width:100px;font-weight:800'});
 	// cetn(th, 'td', '횟수', {style:'width:100px;font-weight:800'});
 	var tbody = ce(table, 'tbody', );
-	var cnt = data.length;
+	var cnt = game_record.length;
 	if(cnt > 10){
 		cnt = 10;
 	}
 	for(var i=0;i<cnt;i++){
+		var t = game_record[i][1];
+		var h, m, ms, s;
+		ms = t % 1000;
+		s = Math.floor((t / 1000) % 60);
+		m = Math.floor((t / 60000) % 60);
+		h = Math.floor(t / 3600000);
+	  
 		var tr = ce(tbody, 'tr');
 		cetn(tr, 'td', i+1);
-		cetn(tr, 'td', data[i][0]);
-		cetn(tr, 'td', data[i][1]);
+		cetn(tr, 'td', game_record[i][0]);
+		cetn(tr, 'td', m + "분 " + s + "초 " + ms);
 		// cetn(tr, 'td', data[i][2]);
 	}
 }
