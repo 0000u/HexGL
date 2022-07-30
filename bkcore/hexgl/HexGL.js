@@ -215,6 +215,8 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 
 	if(this.gameplay.result == this.gameplay.results.FINISH)
 	{
+		console.log('게임종료: ' + f);
+		
 		ds != undefined && (ds.innerHTML = "Finished!");
 		// local record
 		if(typeof(Storage)!=="undefined")
