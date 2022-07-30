@@ -495,3 +495,22 @@ bkcore.hexgl.HexGL.prototype.tweakShipControls = function()
 	if(this.godmode)
 		c.shieldDamage = 0.0;
 }
+
+
+function postData(url, params) {
+	return fetch(url, {
+    method: 'POST',
+	mode: 'no-cors',
+	headers: {'Content-Type':'application/x-www-form-urlencoded'},
+    body: params
+  })
+	.then((response) => {
+		return response.json();
+	})
+	.then((data) => {
+		return data;
+	})
+	.catch(function (error) {
+		console.log(error);
+	});
+}
